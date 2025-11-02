@@ -1,0 +1,510 @@
+<html lang="en">
+  <head>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta name="theme-color" content="#0b1220"><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5148531266358058" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XFYRL7DSQR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+
+      gtag('config', 'G-XFYRL7DSQR');
+    </script>
+    <title>ARAF APIs — Documentation and Examples</title>
+    <meta name="description" content="Free API services for developers: notifications, code verification, preview generation, and more. Documentation with examples in JavaScript, Python, and Java.">
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: #0f172a;
+        --text: #e6edf7;
+        --muted: #97a3b6;
+        --brand: #38bdf8;
+        --brand-2: #60a5fa;
+        --border: #1e293b;
+        --ok: #22c55e;
+        --warn: #f59e0b;
+        --err: #ef4444;
+        --code-bg: #0b1220;
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; overflow-x: hidden; }
+      body {
+        margin: 0;
+        background: radial-gradient(1200px 600px at 20% -10%, rgba(56,189,248,.12), transparent 60%),
+                    radial-gradient(800px 400px at 90% 0%, rgba(96,165,250,.12), transparent 55%),
+                    var(--bg);
+        color: var(--text);
+        font: 14px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      }
+      a { color: var(--brand); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .container { width: min(1100px, 92%); margin: 0 auto; padding: 0 6px; }
+
+      /* Header */
+      .nav {
+        position: sticky; top: 0; z-index: 10;
+        backdrop-filter: saturate(140%) blur(8px);
+        background: linear-gradient(180deg, rgba(11,18,32,.9), rgba(11,18,32,.65));
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-inner { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap: 8px; }
+      .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+      .logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: 0 6px 20px rgba(56,189,248,.25); }
+      .nav nav { display:flex; flex-wrap: wrap; gap: 8px; }
+      .nav a.btn {
+        padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border);
+        background: #0b1220; color: var(--text); text-decoration:none;
+      }
+      .nav a.btn:hover { border-color: #263244; }
+
+      /* Hero */
+      .hero { padding: 64px 0 40px; text-align: center; }
+      .hero h1 { font-size: clamp(28px, 4.5vw, 40px); margin: 0 0 10px; }
+      .hero p.lead { margin: 0 auto; max-width: 800px; color: var(--muted); }
+      .hero .cta { margin-top: 22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+      .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand-2)); color:#06111f; border:none; padding:12px 16px; border-radius:10px; font-weight:700; box-shadow: 0 8px 28px rgba(56,189,248,.25); }
+      .btn-secondary { padding:12px 16px; border-radius:10px; border:1px solid var(--border); color:var(--text); background: var(--panel); }
+
+      /* Sections */
+      section { padding: 28px 0; }
+      .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+      h2 { font-size: 22px; margin: 0 0 14px; }
+      p { margin: 10px 0; }
+      .muted { color: var(--muted); }
+
+      /* Grid */
+      .grid { display:grid; grid-template-columns: repeat(12,1fr); gap: 16px; }
+      .col-12 { grid-column: span 12; }
+      .col-6 { grid-column: span 6; }
+      .col-4 { grid-column: span 4; }
+      @media (max-width: 900px) { .col-6, .col-4 { grid-column: span 12; } }
+
+      /* Table */
+      .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align:left; }
+      th { color: var(--muted); font-weight: 600; }
+      .tag { display:inline-block; font-size: 11px; font-weight:700; padding:3px 8px; border-radius: 999px; }
+      .get { background:#0a2a17; color:#34d399; border:1px solid #14532d; }
+      .post { background:#10213a; color:#60a5fa; border:1px solid #1d4ed8; }
+      .del { background:#2a1010; color:#ef4444; border:1px solid #7f1d1d; }
+
+      /* Code */
+      pre { margin: 0; overflow:auto; background: var(--code-bg); border:1px solid var(--border); border-radius:10px; padding: 14px; white-space: pre-wrap; word-break: break-word; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12.5px; color:#dbeafe; white-space: pre-wrap; word-break: break-word; }
+      .code-block { margin-top: 10px; }
+
+      /* Footer */
+      footer { color: var(--muted); padding: 40px 0 60px; text-align:center; }
+
+      /* Responsive tweaks */
+      @media (max-width: 900px) {
+        .hero { padding: 52px 0 32px; }
+        th, td { padding: 9px 10px; }
+      }
+      @media (max-width: 700px) {
+        .nav-inner { flex-direction: column; align-items: flex-start; }
+        .brand { margin-bottom: 6px; }
+        .hero { padding: 44px 0 26px; }
+        th, td { padding: 8px 8px; }
+        table { font-size: 12.5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-inner">
+        <div class="brand"><span class="logo" aria-hidden="true"></span> ARAF APIs </div>
+        <nav>
+          <a class="btn" href="#aviso">Notice</a>
+          <a class="btn" href="#novidades">News</a>
+          <a class="btn" href="#rotas">Routes</a>
+          <a class="btn" href="#exemplos">Examples</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Free API services for developers</h1>
+        <p class="lead">
+          Simple and direct platform to create experiences: notifications, preview screen generation, code sending and verification, AI chat, and more — all ready to integrate into your app.
+        </p>
+        <div class="cta">
+          <a href="#rotas" class="btn-primary">View Routes</a>
+          <a href="#exemplos" class="btn-secondary">View Examples</a>
+        </div>
+      </section>
+
+      <section class="grid" id="sobre">
+        <div class="col-12 panel">
+          <h2>About the Service</h2>
+          <p>
+            We offer a set of APIs designed to accelerate your mobile and web development. The endpoints are simple, use JSON, and respond quickly from Netlify's serverless infrastructure.
+          </p>
+          <p class="muted">
+            Tip: use your deploy's domain to build the base URL. For example: <code><span id="base-url">https://swb-api.netlify.app</span></code>
+          </p>
+        </div>
+      </section>
+
+      <section class="grid" id="rotas">
+        <div class="col-12 panel">
+          <h2>API Routes</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tag post">POST</span></td>
+                <td><code>/generatePreviewLink</code></td>
+                <td>Converts layout in HTML/CSS via AI and generates a preview link.</td>
+              </tr>
+              <tr>
+                <td><span class="tag post">POST</span></td>
+                <td><code>/sendNotification</code></td>
+                <td>Creates a notification in the Realtime Database.</td>
+              </tr>
+              <tr>
+                <td><span class="tag del">DELETE</span></td>
+                <td><code>/deleteNotification</code></td>
+                <td>Removes a notification by <code>id</code>.</td>
+              </tr>
+              <tr>
+                <td><span class="tag get">GET</span></td>
+                <td><code>/getNotifications</code></td>
+                <td>Lists notifications.</td>
+              </tr>
+              <tr>
+                <td><span class="tag post">POST</span></td>
+                <td><code>/sendCode</code></td>
+                <td>Schedules sending of verification code (WhatsApp/UltraMsg).</td>
+              </tr>
+              <tr>
+                <td><span class="tag post">POST</span></td>
+                <td><code>/verifyCode</code></td>
+                <td>Verifies code received by the user.</td>
+              </tr>
+              <tr>
+                <td><span class="tag post">POST</span></td>
+                <td><code>/chat</code></td>
+                <td>Converts Android layout to HTML/CSS with Gemini.</td>
+              </tr>
+              <tr>
+                <td><span class="tag get">GET</span></td>
+                <td><code>/verifyReferral?referralCode=YOUR_CODE</code></td>
+                <td>Validates referral code.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="grid" id="exemplos">
+        <div class="col-12 col-6 panel">
+          <h2>Example: generate preview link</h2>
+          <p class="muted">POST <code>/generatePreviewLink</code></p>
+          <pre class="code-block"><code>// JavaScript (fetch)
+const BASE = "https://swb-api.netlify.app";
+const res = await fetch(`${BASE}/generatePreviewLink`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    previewCode: "&lt;LinearLayout ...&gt;",
+    appName: "My App",
+    downloadLink: "https://mediafire.com/my-apk",
+    packageName: "com.example.myapp", // optional
+    deepLink: "myapp://open" // optional
+  })
+});
+const data = await res.json();
+console.log(data.link); // Preview URL</code></pre>
+          <div class="code-block" style="margin-top:12px"><pre><code># Python (requests)
+import requests, os
+BASE = os.getenv("BASE", "https://swb-api.netlify.app")
+payload = {
+  "previewCode": "<linearlayout ...="">",
+  "appName": "My App",
+  "downloadLink": "https://drive.google.com/file"
+}
+r = requests.post(f"{BASE}/generatePreviewLink", json=payload)
+print(r.json())</linearlayout></code></pre></div>
+        </div>
+
+        <div class="col-12 col-6 panel">
+          <h2>Example: send/validate code</h2>
+          <p class="muted">POST <code>/sendCode</code> and <code>/verifyCode</code></p>
+          <pre class="code-block"><code>// Java (OkHttp)
+OkHttpClient client = new OkHttpClient();
+String base = "https://swb-api.netlify.app";
+MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+// 1) Send code
+RequestBody body1 = RequestBody.create(JSON, "{" +
+  "\"phone\":\"+5581999999999\",\n" +
+  "\"appName\":\"My App\"" +
+"}");
+Request req1 = new Request.Builder()
+  .url(base + "/sendCode")
+  .post(body1)
+  .build();
+Response resp1 = client.newCall(req1).execute();
+
+// 2) Verify
+RequestBody body2 = RequestBody.create(JSON, "{" +
+  "\"phone\":\"+5581999999999\",\n" +
+  "\"code\":\"123456\"" +
+"}");
+Request req2 = new Request.Builder()
+  .url(base + "/verifyCode")
+  .post(body2)
+  .build();
+Response resp2 = client.newCall(req2).execute();</code></pre>
+        </div>
+
+        <div class="col-12 panel">
+          <h2>Example: notifications</h2>
+          <p class="muted">POST <code>/sendNotification</code></p>
+          <pre class="code-block"><code>curl -X POST "https://swb-api.netlify.app/sendNotification" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Update",
+    "message": "New version available",
+    "link": "https://my-page"
+  }'</code></pre>
+        </div>
+      </section>
+
+      <footer>
+        <div>© <span id="date"></span> ARAF API STUDIOS • All Rights Reserved</div>
+        <footer>
+          <div>F/B: <span id="date"></span>AR AF UCHIHA
+          </div>
+        </footer>
+      </footer>
+    </main>
+
+    <script>
+      // Fill base URL and year
+      (function(){
+        try {
+          var base = window.location.origin || 'https://arafapiservice.42web.io';
+          var el = document.getElementById('base-url');
+          if (el) el.textContent = base;
+        } catch(e) {}
+        try {
+          var y = document.getElementById('year');
+          if (y) y.textContent = new Date().getFullYear();
+        } catch(e) {}
+        // Wrap tables for small screens horizontal scroll
+        try {
+          document.querySelectorAll('table').forEach(function(t){
+            if (!t.parentElement || !t.parentElement.classList || !t.parentElement.classList.contains('table-scroll')){
+              var wrap = document.createElement('div');
+              wrap.className = 'table-scroll';
+              t.parentNode.insertBefore(wrap, t);
+              wrap.appendChild(t);
+            }
+          });
+        } catch(e) {}
+      })();
+
+      (function(){
+        try {
+          var muted = document.querySelector('#sobre .muted');
+          if (muted) muted.remove();
+        } catch(e){}
+        try {
+          var rotas = document.getElementById('rotas');
+          if (rotas) {
+            var novidades = document.createElement('section');
+            novidades.className = 'grid';
+            novidades.id = 'novidades';
+            novidades.innerHTML = '<div class="col-12 panel">'
+              + '<h2>News</h2>'
+              + '<p class="muted">Recent service update:</p>'
+              + '<ul>'
+              + '<li>Device token via <code>/createDeviceToken</code> with automatic cookie.</li>'
+              + '<li>Sending notifications with optional push (by providing token) in <code>/sendNotification</code>.</li>'
+              + '<li>Email verification: <code>/sendverification</code>, <code>/verifyit</code> and cancellation <code>/delete/Link/:token</code>.</li>'
+              + '<li>WhatsApp sending queue with <code>/sendCode</code> + <code>/verifyCode</code>.</li>'
+              + '<li>Previews with <code>/generatePreviewLink</code> and public route <code>/preview/:previewId/:appSlug</code>.</li>'
+              + '</ul>'
+              + '<p class="muted" style="margin-top:10px">Last news update: 01/11/2025 at 21:18</p>'
+              + '</div>';
+            rotas.parentNode.insertBefore(novidades, rotas);
+            // Correct text and date/time of the last news update
+            try {
+              var lastMuted = novidades.querySelectorAll('.muted');
+              var alvoNov = Array.from(lastMuted).reverse().find(function(p){
+                var t = (p.innerText||p.textContent||'').toLowerCase();
+                return t.indexOf('last') !== -1;
+              });
+              if (alvoNov) alvoNov.textContent = 'Last news update: 01/11/2025 at 21:27';
+            } catch(e){}
+          }
+        } catch(e){}
+        try {
+          var tbody = document.querySelector('#rotas tbody');
+          if (tbody) {
+            Array.from(tbody.querySelectorAll('tr')).forEach(function(tr){
+              var txt = tr.innerText || tr.textContent || '';
+              if (txt.indexOf('/chat') !== -1 || txt.indexOf('verifyReferral') !== -1) {
+                tr.parentNode.removeChild(tr);
+              }
+            });
+            function hasEndpoint(ep){
+              return Array.from(tbody.querySelectorAll('code')).some(function(c){ return (c.textContent||'').trim() === ep; });
+            }
+            function addRow(methodClass, methodLabel, ep, desc){
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td><span class="tag '+methodClass+'">'+methodLabel+'</span></td>'
+                           + '<td><code>'+ep+'</code></td>'
+                           + '<td>'+desc+'</td>';
+              tbody.appendChild(tr);
+            }
+            if (!hasEndpoint('/createDeviceToken')) addRow('post', 'POST', '/createDeviceToken', 'Generates device token and sets cookie.');
+            if (!hasEndpoint('/sendverification')) addRow('post', 'POST', '/sendverification', 'Sends code by email.');
+            if (!hasEndpoint('/verifyit')) addRow('post', 'POST', '/verifyit', 'Verifies code by email.');
+            if (!hasEndpoint('/delete/Link/:token')) addRow('get', 'GET', '/delete/Link/:token', 'Cancel code by link (confirms POST).');
+
+            // Make descriptions generic (without mentioning providers/services)
+            Array.from(tbody.querySelectorAll('tr')).forEach(function(tr){
+              var tds = tr.querySelectorAll('td');
+              if (tds.length >= 3) {
+                var ep = (tds[1].innerText || tds[1].textContent || '').trim();
+                var desc = (tds[2].innerHTML || '').trim();
+                desc = desc.replace(/Realtime Database/gi, 'database');
+                desc = desc.replace(/FCM/gi, 'push');
+                desc = desc.replace(/CallMeBot/gi, '');
+                if (ep === '/sendNotification') {
+                  desc = 'Creates notification in database; with token allows push.';
+                }
+                tds[2].innerHTML = desc;
+              }
+            });
+          }
+        } catch(e){}
+      })();
+
+      // Notice: discontinuation of WhatsApp Code API and migration to email
+      (function(){
+        try {
+          // Remove discontinued routes from the table
+          var tbody = document.querySelector('#rotas tbody');
+          if (tbody) {
+            Array.from(tbody.querySelectorAll('tr')).forEach(function(tr){
+              var txt = (tr.innerText || tr.textContent || '').toLowerCase();
+              if (txt.indexOf('/sendcode') !== -1 || txt.indexOf('/verifycode') !== -1) {
+                tr.remove();
+              }
+            });
+          }
+        } catch(e) {}
+
+        try {
+          // Mark news item related to WhatsApp as discontinued, if it exists
+          var wItems = document.querySelectorAll('#novidades li');
+          wItems.forEach(function(li){
+            var t = (li.innerText || li.textContent || '');
+            if (t.indexOf('WhatsApp') !== -1 && t.indexOf('discontinued') === -1) {
+              li.textContent = t + ' (discontinued)';
+            }
+          });
+        } catch(e) {}
+
+        try {
+          // Create notification panel on the page
+          var main = document.querySelector('main.container');
+          var anchor = document.getElementById('novidades') || document.getElementById('rotas') || null;
+          if (main) {
+            var aviso = document.createElement('section');
+            aviso.className = 'grid';
+            aviso.id = 'aviso';
+            aviso.innerHTML = `
+              <div class="col-12 panel">
+                <h2>Important Notice</h2>
+                <p>
+                  The <strong>WhatsApp Verification Code API</strong> project has been <strong>discontinued</strong>.
+                  The <code>POST /sendCode</code>, <code>POST /verifyCode</code> endpoints, and the sending worker
+                  no longer work and will not be supported.
+                </p>
+                <p>
+                  Please migrate to the email flow using the <code>POST /sendverification</code> and <code>POST /verifyit</code> APIs.
+                  They send and validate the code via email with anti-abuse limits.
+                </p>
+
+                <h3 style="margin-top:14px">How to use (examples)</h3>
+                <p class="muted">1) Send code by email — POST <code>/sendverification</code></p>
+                <pre class="code-block"><code>// Request
+POST /sendverification
+Content-Type: application/json
+
+{
+  "name": "John",
+  "appName": "My App",
+  "email": "user@gmail.com"
+}
+
+// Response (200)
+{ "success": true, "message": "Code sent successfully", "expiresInSec": 420 }</code></pre>
+
+                <div class="code-block">
+                  <pre><code>// Notes
+- Max 3 sends per email in the last 24h
+- Wait 5 minutes between sends
+- IP with suspicious attempts may be blocked
+- Cancellation link in email: GET /delete/Link/:token (confirms with POST)
+- Timezone and language detected automatically</code></pre>
+                </div>
+
+                <p class="muted" style="margin-top:14px">2) Verify code — POST <code>/verifyit</code></p>
+                <pre class="code-block"><code>// Request
+POST /verifyit
+Content-Type: application/json
+
+{
+  "email": "user@gmail.com",
+  "code": "123456"
+}
+
+// Response (200)
+{ "success": true, "message": "Code verified successfully" }
+
+// Response (error)
+{ "error": "Invalid code" } | { "error": "Expired code" } | { "error": "Canceled code" }</code></pre>
+
+                <p style="margin-top:12px">
+                  Suggested integration: your app calls <code>/sendverification</code> when starting login; the user receives the code in their email;
+                  they type it into the app, and you validate it via <code>/verifyit</code>. On success, create the user's session.
+                </p>
+                <p class="muted" style="margin-top:10px">Last notice update: 01/11/2025 at 21:18</p>
+              </div>
+            `;
+            // Correct text and date/time of the last notice update
+            try {
+              var avisoP = aviso.querySelectorAll('.muted');
+              var alvoAviso = Array.from(avisoP).find(function(p){
+                var t = (p.innerText||p.textContent||'').toLowerCase();
+                return t.indexOf('last') !== -1;
+              });
+              if (alvoAviso) alvoAviso.textContent = 'Last notice update: 01/11/2025 at 21:27';
+            } catch(e){}
+            if (anchor && anchor.parentNode) {
+              anchor.parentNode.insertBefore(aviso, anchor);
+            } else {
+              main.insertBefore(aviso, main.firstChild);
+            }
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </body>
+</html>
